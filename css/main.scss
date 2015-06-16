@@ -88,9 +88,13 @@
     color: #fff;
     left: 1.1em;
 
+    @media #{$breakpoint-medium} {
+        left: 9.7em;
+        top: 65px;
+    }
+
     @media #{$breakpoint-large} {
         left: 11.9em;
-        top: 65px;
     }
 }
 
