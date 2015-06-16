@@ -43,8 +43,8 @@ let FilterableListItem = React.createClass({
                     </h3>
                     <div className="item__instructions">
                         <div dangerouslySetInnerHTML={{__html: this.props.instructions}}></div>
-                        <button className="button item__button" onClick={this.props.resetQuery}>Search again</button>
-                        <button className="button item__button" onClick={this.toggle}>Close</button>
+                        <button className="button item__button" onClick={this.props.resetQuery}>Попробовать ещё раз</button>
+                        <button className="button item__button" onClick={this.toggle}>Закрыть</button>
                     </div>
                 </li>
             </ReactTransitionGroup>
@@ -123,16 +123,16 @@ let FilterableList = React.createClass({
     renderNoItems() {
         return (
             <li className="item">
-                <h3>No results for "{this.state.query}"</h3>
-                <p><a href="mailto:magalhini@gmail.com?subject=I need something from you!">Submit a help item?</a></p>
+                <h3>Нет результатов для «{this.state.query}»</h3>
+                <p><a href="https://github.com/htmlacademy/firstaidgit">Помогите найти решение</a></p>
             </li>);
     },
 
     renderCount(count, length) {
-        var word = 'Results';
+        var word = 'Результаты';
 
         if (!count) return null;
-        if (count === length) word = 'All topics';
+        if (count === length) word = 'Все вопросы';
 
         return (<p className="c-filterableList__number">
                   <b>{word}</b> ({count})
@@ -157,7 +157,7 @@ let FilterableList = React.createClass({
         if (!items.length && flatQuery) {
             items = this.renderNoItems(); // No matches
         } else if (!items.length && !flatQuery) {
-            items = (<li>Loading content... help is on the way.</li>); // Still loading
+            items = (<li>Загрузка...... помощь уже в пути.</li>); // Still loading
         }
 
         // Title of list, depending on the state of the search
@@ -181,7 +181,7 @@ let FilterableList = React.createClass({
                             {inputIcon}
                         </ReactTransitionGroup>
 
-                    <label className="c-filterableList__help-label">e.g., undo commit before push</label>
+                    <label className="c-filterableList__help-label">например, отмена коммита до публикации изменений</label>
                 </div>
                 <div className="c-filterableList__wrapper">
                     <div className="column-9 ms-fw">

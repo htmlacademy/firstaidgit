@@ -14,7 +14,7 @@ let Home = React.createClass({
         var self = this;
 
         if (this.isMounted()) {
-            fetch('./assets/posts.json')
+            fetch('./assets/posts.ru.json')
                 .then(function(res) {
                     res.headers['X-Request-URL'] = res.url;
                     return res.json();
@@ -43,7 +43,7 @@ let Home = React.createClass({
                 self.componentDidMount();
             }, 5000);
 
-            return (<h1 className="error-state">Oh noes, something went wrong pulling the data!</h1>);
+            return (<h1 className="error-state">Что-то пошло не так!</h1>);
         }
 
         // It's very bad that the Sidebar component is being injected here.
@@ -54,7 +54,7 @@ let Home = React.createClass({
                     data = { this.state.data }
                     autofocus = "true"
                     sidebar = {Sidebar}
-                    placeholder = "What do you need help with?"
+                    placeholder = "Чем вам помочь?"
                     />
             </section>
         );

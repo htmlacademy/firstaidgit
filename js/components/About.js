@@ -6,28 +6,22 @@ let About = React.createClass({
             <section className="main-content section-about wrapper">
                 <div className="row">
                     <div className="column-12">
-                        <h2 className="section-title">What is this all about?</h2>
-                        <p className="section-copy">First Aid Git started out as a dummy project while I was learning more on
-                        using <a href="http://webpack.github.io">Webpack</a> with <a href="https://facebook.github.io/react/">React</a>. Halfway through it I thought about making something
-                        useful out of it, so I began to collect a few posts about the most frequently asked questions about git issues.</p>
-
-                    <p className="section-copy">The motivation behind it was to have an easy and quick way to
-                    search through the most common git-related issues when they arise, as I find myself having
-                    dozens of Stackoverflow bookmarks scattered everywhere for these issues.</p>
+                        <h2 className="section-title">Что это такое?</h2>
+                        <p className="section-copy">First Aid Git создавался как учебный проект, когда я&nbsp;подробно изучал использование <a href="http://webpack.github.io">Webpack</a> вместе с&nbsp;<a href="https://facebook.github.io/react/">React</a>. Через какое-то время я&nbsp;решил, что надо превратить это во&nbsp;что-нибудь полезное, поэтому начал собирать посты о&nbsp;самых частых вопросах по&nbsp;проблемам с&nbsp;Git.</p>
+                        <p className="section-copy">Целью было создание простого и&nbsp;быстрого поиска по&nbsp;самым популярным Git проблемам, так как у&nbsp;меня по&nbsp;ним накопились десятки закладок в&nbsp;Stack Overflow.</p>
                     </div>
 
                     <div className="row">
                         <div className="column-12">
-                            <h2 className="section-title">The source code looks a bit messy...?</h2>
-                            <p className="section-copy">That's because it is messy! Since this wasn't meant to become a project
-                            in the first place, I wasn't paying too much attention to its structure... so I will be cleaning up the code as the project is being maintained.</p>
+                            <h2 className="section-title">Исходный код выглядит немного неряшливо...?</h2>
+                            <p className="section-copy">Потому что он&nbsp;такой и&nbsp;есть! Так как это не&nbsp;задумывалось изначально как проект, я&nbsp;особо и&nbsp;не&nbsp;следил за&nbsp;его структурой... поэтому я&nbsp;буду подчищать код по&nbsp;мере развития проекта.</p>
                         </div>
                     </div>
 
                     <div className="row">
                         <div className="column-12">
-                            <h2 className="section-title">Can I contribute?</h2>
-                                <p className="section-copy">You can and you should! Submit your changes on <a href="https://github.com/magalhini/firstaidgit">Github</a> or drop a <a href="http://www.twitter.com/magalhini">tweet</a>. I'd love to hear some feedback</p>
+                            <h2 className="section-title">А можно помочь?</h2>
+                                <p className="section-copy">Можно и&nbsp;нужно! Присылайте ваши изменения в&nbsp;<a href="https://github.com/htmlacademy/firstaidgit">Github</a> или <a href="https://twitter.com/htmlacademy_ru">Twitter</a>. Будем рады вашим отзывам и&nbsp;комментариям.</p>
                         </div>
                     </div>
                 </div>
