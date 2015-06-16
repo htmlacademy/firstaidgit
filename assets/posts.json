@@ -1,205 +1,214 @@
 [{
-        "title": "Слияние моих локальных изменений с другой веткой",
-        "content": "Это можно сделать прямо в процессе стандартного слияния (`merge`). Вам стоит *сохранить историю слияний* используя флаг `--no-ff`, что означает _no fast forward_. \n\n Перейдите в ветку, в которую будут вливаться изменения, убедитесь в ее актуальности и запустите процесс: \n\n `git merge <другая-ветка> --no-ff` \n\n Затем появится сообщение о коммите `merge X into Y branch`, после чего вы можете смело запушить ваше слияние.>",
-        "help": "modify undo commit after push reset изменение отмененного коммита"
+        "title": "Merge my local changes with another branch",
+        "content": "This can be done while a regular `merge`, and you should *keep your merge history* by making sure to use `--no-ff`, which means _no fast forward_. \n\n Switch to the branch you're merging against, make sure it's up to date, and merge: \n\n `git merge <the-other-branch> --no-ff` \n\n You should get a commit message with the `merge X into Y branch`, and then you can safely push your merge.>",
+        "help": "modify undo commit after push reset"
 },
 {
-        "title": "Отмена коммита до публикации изменений",
-        "content": "Если вы сделали коммит, который впоследствии понадобилось отредактировать или полностью стереть, поможет команда git `reset`. \n\n `git reset HEAD~1 # отменить последний коммит, сохранить изменения` \n\n `git reset --hard HEAD~1 #отменить последний коммит, стереть изменения` \n\n Будьте осторожны используя второй вариант, поскольку изменения ваших локальных файлов будут потеряны. \n\n Чтобы сохранить сообщение коммита, наберите: :\n\n `git commit -i ORIG_HEAD`\n\n Подсказал [hrbonz](https://github.com/hrbonz)",
-        "help": "modify undo commit local before push reset изменение отмена коммита до публикации"
+        "title": "Undo commit before pushing changes",
+        "content": "If you made a commit that you wish to modify or erase entirely, the git `reset` command can be of help here. \n\n `git reset HEAD~1 # undo last commit, keep the changes` \n\n `git reset --hard HEAD~1 #undo last commit, erase the changes` \n\n Naturally, be careful when using the last option as your local files will be discarded! \n\n To keep the same commit message:\n\n `git commit -a -c ORIG_HEAD`\n\n You will be prompted with your last commit message. \n\n Tips from [hrbonz](https://github.com/hrbonz) ",
+        "help": "modify undo commit local before push reset"
 },
 {
-        "title": "Восстановление удаленной ветки",
-        "content": "С помощью комманды `git reflog` можно узнать хэш (SHA1)  последнего коммита в удаленной ветке. Скопируйте этот хэш и используйте в команде: \n\n `git checkout <sha>` \n\n После этого восстановить удаленную ветку можно будет вот такой командой: \n\n `git checkout -b <branchname>`",
-        "help": "recover deleted branch восстановлние удаленной ветки",
+        "title": "Recover a deleted branch",
+        "content": "By typing `git reflog`, you can grab the commit hash (SHA1) at the top of your deleted branch. Copy this `sha`, then use: \n\n `git checkout <sha>` \n\n Once you've done that, recover the branch by typing: \n\n `git checkout -b <branchname>`",
+        "help": "recover deleted branch",
         "cmds": "git reflog"
 },
 {
-        "title": "Отобразить коммиты, содержащие удаленные файлы",
-        "content": "Узнать, в каких коммитах содержатся удаленные файлы, можно с помощью команды: \n\n `git log --diff-filter=D --summary` \n\n Она покажет список коммитов, в которых удалялись файлы.",
-        "help": "display show deleted files history отображение истории удаления файлов"
+        "title": "Display the commits that have deleted files",
+        "content": "You can quickly check which commits included deleted files by using the following command: \n\n `git log --diff-filter=D --summary` \n\n This will show you the commits in which files were removed.",
+        "help": "display show deleted files history"
 },
 {
-        "title": "Синхронизировать ветку с master-репозиторием",
-        "content": "Чтобы синхронизировать последние изменения в репозитории master (или любой другой ветке, с которой вы работали) необходимо «перебазировать» локальную ветку. Предположим, вы работаете над веткой `foobar`:\n\n `git checkout foobar` \n\n А затем осуществляете «перебазирование»: \n\n `git rebase master` \n\n После этого будут применены коммиты `origin` из master. После разрешения конфликтов процесс можно продолжить с помощью команды `git rebase --continue`. Теперь можно продолжать работу над своей веткой или осуществить её слияние (merge) с главным репозиторием. \n\n Подробнее о [перебазировании](https://github.com/k88hudson/git-flight-rules#i-need-to-combine-commits)",
-        "help": "rebase branch against master changes перенос изменений из master в локальную ветку"
+        "title": "Rebase my branch with master",
+        "content": "To catch-up with the latest changes from master (or any other branch you started from), you can and should rebase against it. Say you're working on the `foobar` branch: \n\n `git checkout foobar` \n\n Followed by a rebase: \n\n `git rebase master` \n\n This applies the `origin` commits on top of master. When you're done with solving conflicts, continue by using `git rebase --continue`. At this point you can continue to work on your branch or merge it against master. \n\n Learn more about [rebases](https://github.com/k88hudson/git-flight-rules#i-need-to-combine-commits)",
+        "help": "rebase branch against master changes"
 },
 {
-        "title": "Восстановление удаленного файла",
-        "content": "Если вы случайно удалили файл, его можно быстро восстановить: \n\n `git checkout myFile.txt` \n\n Если требуется восстановить файл из конкретной временной точки истории коммитов, следует узнать хеш нужного коммита и запустить команду: \n\n `git checkout $commit~1 myFile.txt`",
-        "help": "restore recover deleted file восстановление удаленного файла"
+        "title": "Restore a deleted file",
+        "content": "If you deleted a file by accident, you can get it back by checking it out again: \n\n `git checkout myFile.txt` \n\n If you need to restore a file from a certain point in time in your commit history, grab the hash of that commit and run: \n\n `git checkout $commit~1 myFile.txt`",
+        "help": "restore recover deleted file"
 },
 {
-        "title": "Отменение локальных изменений файлов",
-        "content": "Простейшим способом избавиться от нежелательных изменений для файлов и папок является восстановление состояния последнего коммита. Сделать это можно с помощью специальной команды: \n\n `git checkout myFile.txt` \n\n Кроме того, можно восстановить конкретный путь к файлу: \n\n `git checkout -- myPath`",
-        "help": "revert reset file specific version восстановление конкретной версии файла"
+        "title": "Discard local file changes",
+        "content": "The easiest way to get rid of unwanted changes is by resetting a file or a folder to the current commit state. To do so, you can use \n\n `git checkout myFile.txt` \n\n You can also reset a specific path instead: \n\n `git checkout -- myPath`",
+        "help": "revert changes reset file specific version"
 },
 {
-        "title": "Очистка всех скрытых состояний",
-        "content": "Очистить все скрытые состояния можно следующей командой: \n\n `git stash clear`",
-        "help": "clear stash очистка скрытых состояний"
+        "title": "Clear all stashed states",
+        "content": "You can clear all stashed states by using: \n\n `git stash clear`",
+        "help": "clear stash"
 },
 {
-        "title": "Удаление неотслеживаемых файлов и папок",
-        "content": " Чтобы удалить неотслеживаемые файлы и папки из рабочей копии наберите следующую команду: \n\n `git clean -f` \n\n Чтобы в принципе удалить их: \n\n `git clean -fd` \n\n Подсказка: чтобы увидеть, какие файлы являются лишними, перед их непосредственным удалением, наберите: \n\n `git clean -n`",
-        "help": "очистка мусорных файлов remove clear untracked files",
+        "title": "Remove untracked files and folders",
+        "content": "To remove all untracked files from your working copy: \n\n `git clean -f` \n\n To remove all untracked files and folders: \n\n `git clean -fd` \n\n Tip: If you'd like to see first which files will be untracked before actually removing them, you can do a safe clean test by running: \n\n `git clean -n`",
+        "help": "remove clear untracked files",
         "cmds": "git clean"
 },
 {
-        "title": "Изменение сообщения коммита перед его отправкой",
-        "content": "Изменить сообщение коммита можно с помощью команды `git commit --amend`, она откроет редактор, в котором можно будет внести необходимые поправки в последнее сообщение. \n\n Сообщение можно изменить и напрямую с помощью команды \n\n `git commit --amend -m \"Новое прекрасное сообщение\"`",
-        "help": "undo commit message before pushing amend изменение сообщения коммита перед отправкой"
+        "title": "Undo a commit message before pushing",
+        "content": "You can amend your commit message by typing `git commit --amend`, which will open your editor and allow you to make changes to the most recent commit message. \n\n You can also modify the message directly, by using: \n\n `git commit --amend -m \"My new awesome message\"`",
+        "help": "undo commit message before pushing amend"
 },
 {
-        "title": "Отсортировать коммиты по автору",
-        "content": "Чтобы вывести список коммитов, отфильтрованных по автору, следует воспользоваться следующей командой: \n\n `git log --author=\"Имя Автора\"`",
-        "help": "display show commits by author name отображение коммитов, отфильтрованных по автору",
+        "title": "Display commits by author",
+        "content": "You can filter the commit history by author by using: \n\n `git log --author=\"AuthorName\"`",
+        "help": "display show commits by author name",
         "cmds": "git log author"
 },
 {
-        "title": "Поиск конкретного сообщения во всех коммитах",
-        "content": " Чтобы найти конкретный текст сообщения коммита, соответствующий регулярному выражению, нужно воспользоваться командой\n\n `git log --grep <запрос>`",
-        "help": "search commit message regexp log find поиск сообщения коммита с помощью регулярного выражения"
+        "title": "Search for a specific commit message in all commits",
+        "content": "You can search for a specific commit log by matching it on a regular expression. Use: \n\n `git log --grep <your-query>`",
+        "help": "search commit message regexp log find"
 },
 {
-        "title": "Изменение сообщения коммита после его отправки",
-        "content": "В данном случае процесс занимает два шага. Сначала нужно изменить сообщение с помощью комманды `git commit --amend`, а затем перезаписать историю коммитов локальной ветки: `git push <remote> <branch> --force` \n\n **Предупреждение:** подобная насильная перезапись привести к потери коммитов из внешней ветки, если с ней давно не было синхронизации, соблюдайте осторожность.",
-        "help": "undo commit message after pushing amend изменение сообщения коммита после его отправки"
+        "title": "Undo a commit message after pushing",
+        "content": "This is a two-step process. You need to amend your commit message by using `git commit --amend`, and then you re-write your branch commit history by force pushing the commit: `git push <remote> <branch> --force` \n\n **Warning:** by force pushing, you can lose the remote branch commits if your local branch is not up to date, so be careful.",
+        "help": "undo commit message after pushing amend"
 },
 {
-        "title": "Совмещение двух и более коммитов",
-        "content": "Здесь нам понадобится произвести интерактивное перебазирование. Если перебазирование происходит относительно master-ветки, то начать следует с команды `git rebase -i master`. Однако, если перебазирование происходит не относительно ветки, то нужно будет перебазироваться относительно `HEAD`.\n\n Если есть необходимость в совмещении двух последних коммитов, можно использовать команду \n\n `git rebase -i HEAD~2`.\n\n После её ввода появятся инструкции по выбору коммитов. В том случае, если необходимо совместить все коммиты с первым *старейшим* коммитов, то в первой строке нужно написать `pick`, а для всех остальных коммитов изменить букву на `f`. Подробнее [здесь](https://github.com/k88hudson/git-flight-rules#i-need-to-combine-commits) ",
-        "help": "combine commits join rebase совмещение коммитов",
+        "title": "Combine two or more commits",
+        "content": "You will need to use an interactive rebase. If you're rebasing against master, start the process by typing `git rebase -i master`. However, if you're not rebasing against a branch, you'll need to rebase against your `HEAD`.\n\n If you want to squash your last 2 commits, you can use: \n\n `git rebase -i HEAD~2`.\n\n You will then be prompted to follow instructions to pick commits. If you wish to combine all your commits with the oldest *first* commit, leave the first line with `pick` and change the letter to `f` on all other commits. Learn more about [rebases](https://github.com/k88hudson/git-flight-rules#i-need-to-combine-commits) ",
+        "help": "combine commits join rebase",
         "cmds": "git rebase"
 },
 {
-        "title": "Удаление файла из git с сохранением его локальной копии",
-        "content": "Для того, чтобы удалить файл из git, но сохранить его локально нужно использовать следующую команду:\n\n `git rm --cached myfile.txt`",
-        "help": "remove file from git delete удаление файла из git"
+        "title": "Remove a file from git but keep the local file",
+        "content": "This will remove the file your your git tracking, but keep your local copy:\n\n `git rm --cached myfile.txt`",
+        "help": "remove file from git delete"
 },
 {
-        "title": "Просмотр старой ревизии файла",
-        "content": "Существует возможность просмотреть содержимое файла в конкретный момент времени в прошлом. Для этого нужно использовать команду: \n\n `git show commitHash:myFile.txt`",
-        "help": "compare old revision file просмотр старой ревизии файла",
+        "title": "Compare an old revision of a file",
+        "content": "You can easily view the contents of a file at a specific point in time by using: \n\n `git show commitHash:myFile.txt`",
+        "help": "compare old revision file",
         "cmds": "git show"
 },
 {
-        "title": "Совмещение коммитов по конкретной функции для добавления в ветку релиза",
-        "content": "Если вы решите совместить и опубликовать коммиты, то возникнет новый коммит в ветке релиза, поэтому история ветки конкретной функции останется неизменной.\n\n Ниже представлен пример того, как достичь подобного эффекта: \n\n `git fetch origin` \n\n `git checkout [release-branch]` \n\n `git rebase origin/[release-branch]` \n\n `git merge —squash —no-commit [feature-branch]` \n\n `git commit -m 'Merge X into Y'` \n\n В конечном итоге останется только один коммит в ветке релиза, а история изменений в ветке разработки конкретной функции останется нетронутой.\n\n [Подробнее о ветках функций](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)",
-        "help": "squash combine commits feature merge update release совмещение коммитов конкретной функции",
+        "title": "Squash feature branch commits to merge into the release branch",
+        "content": "If you decide to merge and squash your commits, this will create a new commit but only in the release branch, therefore the history of the feature branch will remain intact. \n\n Here's an example on how to achieve this: \n\n `git fetch origin` \n\n `git checkout [release-branch]` \n\n `git rebase origin/[release-branch]` \n\n `git merge —squash —no-commit [feature-branch]` \n\n `git commit -m 'Merge X into Y'` \n\n You'll end up with one commit only in your release branch, while keeping the feature history intact. \n\n [Learn more about feature branches](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)",
+        "help": "squash combine commits feature merge update release",
         "cmds": "git squash"
 },
 {
-        "title": "Откат к конкретному коммиту в истории",
-        "content": "Если вас не очень беспокоят изменения в локальном репозитории, то можно «откатиться» к конкретному коммиту в истории с помощью команды: \n\n `git reset --hard HEAD~1` \n\n Эта команда установит HEAD на конкретный коммит. Также можно воспользоваться хешем коммита.",
-        "help": "revert reset commit certain history откат к конкретному коммиту в истории"
+        "title": "Reset to a certain commit in history",
+        "content": "If you don't care about your local changes, you can reset back to one commit back in time by doing a hard reset: \n\n `git reset --hard HEAD~1` \n\n This will set the HEAD back by one commit. You can also do this using the commit hash instead.",
+        "help": "revert reset commit certain history"
 },
 {
-        "title": "Перестать отслеживать существующие файлы",
-        "content": "Если вы хотите перестать отслеживать файлы, которые уже есть в репозитории, но при этом желаете сохранить его локально, осуществите коммит изменений и запустите команду: \n\n `git rm -r --cached` \n\n Она удалит измененные файлы из зоны подготовленных файлов (staging area). Затем нужно запустить команду: \n\n `git add .` и отправить изменения.",
-        "help": "untrack remove files already exist there снятие отметки с существующего файла"
+        "title": "Untrack files that already exist",
+        "content": "If you want to untrack a file that already exists in the repo but would still like to keep it locally, commit your changes and run: \n\n `git rm -r --cached` \n\n This will remove changed files from the staging area. Afterwards, just run a normal: \n\n `git add .` and commit your changes.",
+        "help": "untrack remove files already exist there"
 },
 {
-        "title": "Восстановление удаленного тега",
-        "content": "В том случае, если необходимо восстановить случайно удаленный тег, начать можно с его поиска: \n\n `git fsck --unreachable | grep tag` \n\n После того, как нужный тег найден, его следует восстановить: \n\n `git update-ref refs/tags/NAME KEY` \n\n [Источник](http://java.dzone.com/articles/git-tip-restore-deleted-tag)",
-        "help": "recover undo deleted tag accident восстановление случайно удаленного тега"
+        "title": "Recover a deleted tag",
+        "content": "If you want to recover a tag deleted by accident, start by grabbing it: \n\n `git fsck --unreachable | grep tag` \n\n Once you found it, you can restore it: \n\n `git update-ref refs/tags/NAME KEY` \n\n [Source](http://java.dzone.com/articles/git-tip-restore-deleted-tag)",
+        "help": "recover undo deleted tag accident"
 },
 {
-        "title": "Создание новой ветки с изменениями текущей",
-        "content": "Часто возникает ситуация, при которой пользователи начинают изменять файлы в ветке, чтобы что-то исправить, и лишь позднее вспоминают, что предварительно не создали новую ветку. К счастью, есть способ сделать это уже в процессе: \n\n `git checkout -b название-моей-новой-ветки` \n\n Эта команда перенесет файлы из текущей ветки в новую, которую потом уже можно «закоммитить».",
-        "help": "create new branch keep changes создание новой ветки с сохранением изменений"
+        "title": "Move uncommited changes to a new branch",
+        "content": "Too often we start changing files on a branch to fix something, only then realising we didn't create a new branch before. Luckily, this is as simple as creating a new branch: \n\n `git checkout -b my-new-branch-name` \n\n This will bring any files from your current branch into the new one, which you can commit then.",
+        "help": "create new branch keep changes"
 },
 {
-        "title": "Публикация локальной ветки для удаленного редактирования",
-        "content": "Если вы создали локальную ветку, и хотите, чтобы другие пользователи могли с ней работать, воспользуйтесь командой: \n\n `git push -u origin my-new-branch-name` \n\n Теперь они тоже смогут вносить изменения в эту ветку.",
-        "help": "push local branch remote публикация локальной ветки для удаленной работы"
+        "title": "Push locally created branch to remote",
+        "content": "If you've created a local branch but now want it to be tracked on the remote you can run: \n\n `git push -u origin my-new-branch-name` \n\n Now everyone can checkout to your branch.",
+        "help": "push local branch remote"
 },
 {
-        "title": "Восстановление накопленных изменений",
-        "content": "В том случае, если изменения, внесенные пользователем, находятся в режиме накопления, применить их к ветке можно с помощью команды `git stash apply`. Также можно запустить `git diff` — эта команда поможет выявить различия. Для того, чтобы затем избавиться от накопленных данных, нужно запустить команду: \n\n `git stash drop` \n\n Если существует более одного накопления, найти нужное можно с помощью команды: \n\n `git stash list` затем можно применить его, воспользовавшись его индексом: \n\n `git stash@{1}` \n\n Необходимо учитывать, что отсчёт индексов ведётся от нуля. \n\n [Подробнее о накоплении](http://stackoverflow.com/questions/19003009/git-how-to-recover-stashed-uncommited-changes)",
-        "help": "recover stash stash@ changes stashed восстановление накопленных изменений",
+        "title": "Recover stashed changes",
+        "content": "If you still have your changes stashed, you can apply them onto your branch by using `git stash apply`. You can run `git diff` to compare the differences. To get rid of the stash afterwards run: \n\n `git stash drop` \n\n If you have more than one stash, find the one you need by running: \n\n `git stash list` and applying it by referencing its index: \n\n `git stash@{1}` \n\n Keep in mind that this is zero-based (`stash@{0}` is the first one) \n\n [Read more about stashes](http://stackoverflow.com/q/19003009)",
+        "help": "recover stash stash@ changes stashed",
         "cmds": "git checkout stash"
 },
 {
-        "title": "Переименование локальной и удаленной ветки",
-        "content": "Предложим, у вас есть ветка _“fix-bug25”_, которую вы захотели переименовать в _“hotfix-users”_. Прежде всего, нужно будет изменить локальную ветку: \n\n `git branch -m fix-bug25 hotfix-users` \n\n А затем — удаленную ветку: переименовать её напрямую нельзя, поэтому нужно будет её удалить, и затем опубликовать заново уже с новым именем. Прежде чем приступать к этим процедурам, следует убедиться, что никто из членов команды не работает с этой веткой! Удаляем ветку: `git push origin :fix-bug25` \n\n А теперь заново публикуем её с новым именем: `git push origin hotfix-users`",
-        "help": "rename wrong name branch переименование ветки"
+        "title": "Rename my local and remote branch",
+        "content": "Let’s say you have a _“fix-bug25”_ branch, and you want to rename it to _“hotfix-users”_. First, change the local branch: \n\n `git branch -m fix-bug25 hotfix-users` \n\n Now, the remote branch: you can’t rename the branch directly, so you’ll need to delete it and push it again with the new name. Make sure no one else within your team is working on it! Delete the branch: `git push origin :fix-bug25` \n\n And now let's push the new one: `git push origin hotfix-users`",
+        "help": "rename wrong name branch"
 },
 {
-        "title": "Отмена коммита после отправки его в master-репозиторий",
-        "content": "Рассмотрим процедуру возврата одного или нескольких коммитов, которые нужно стереть из удаленной ветки. Обозначить конкретный коммит можно с помощью его хеша: \n\n `git revert b712c3c` \n\n Отмена только коммита, который является вторым после последнего: \n\n `git revert HEAD^` \n\n Простая отмена последнего коммита: \n\n `git revert -n HEAD` \n\n. [Подробнее о возврате](https://www.atlassian.com/git/tutorials/undoing-changes/git-revert)",
-        "help": "undo revert commit pushed after push возврат коммитов",
+        "title": "Undo a commit after pushing it to master",
+        "content": "This will revert one or more commits that you want to erase from the remote branch. You can either specify one by hash: \n\n `git revert b712c3c` \n\n Revert only the second to last commit: \n\n `git revert HEAD^` \n\n Or simply undo the last commit without creating a revert commit: \n\n `git revert -n HEAD` \n\n Tip: `HEAD~1` is a shortcut to `HEAD^`, they mean the same thing. [Learn more about git revert](https://www.atlassian.com/git/tutorials/undoing-changes/git-revert)",
+        "help": "undo revert commit pushed after push",
         "cmds": "git revert"
 },
 {
-        "title": "Убрать файл из буфера",
-        "content": "Чтобы убрать добавленный по ошибке файл из буфера, нужно воспользоваться простой командой: \n\n `git reset HEAD unlovedFile.txt`",
-        "help": "unstage file from remove commit убрать файл удалить коммит"
+        "title": "Unstage a file",
+        "content": "To unstage a file added by mistake, the easiest option would be: \n\n `git reset HEAD unlovedFile.txt`",
+        "help": "unstage file from remove commit"
 },
 {
-        "title": "Коммит в неправильную ветку",
-        "content": "Нужно переключиться на новую ветку, которую вы забыли предварительно создать: \n\n `git checkout -b <new-branch>`. \n\n А затем переключиться к оригинальной ветке: \n\n `git checkout <original-branch>` \n\n ...и «откатиться» до последнего коммита, который нужно сохранить. \n\n Чтобы это сделать, можно воспользоваться командой `git log` и сохранить хеш (SHA1) последнего коммита, который нужно оставить.. Например, это `a31a45c`. \n\n Тепреь его нужно сбросить: `git reset --hard a31a45c` и отправить получившийся результат. \n\n **Предупреждение:** Убедитесь в том, что никто не отправлял коммиты в оригинальную ветку во время выполнения вышеописанных процедур, в противном случае эти изменения будут потеряны!",
-        "help": "commit wrong branch master accident коммит в неправильную ветку"
+        "title": "Committed to the wrong branch",
+        "content": "Start by switching to the new branch you forgot to create, by typing \n\n `git checkout -b <new-branch>`. \n\n Switch back to the original branch now: \n\n `git checkout <original-branch>` \n\n ...and reset to the last commit you want to keep. \n\n To do so, you can type `git log` and save the hash (SHA1) of the last commit that you want to keep. Let's say this is `a31a45c`. \n\n Now you have to reset it: `git reset --hard a31a45c` and push this last forced reset. \n\n **Warning:** Make sure no one has committed to that original branch in the meantime, or changes might be lost!",
+        "help": "commit wrong branch master accident"
 },
 {
-        "title": "Удаление внешней ветки",
-        "content": "Если вы хотите удалить ветку, введите команду: \n\n `git push origin --delete branch-name`",
-        "help": "delete remote branch удаление внешней ветки"
+        "title": "Delete remote branch",
+        "content": "If you are positive this branch can be deleted, type: \n\n `git push origin --delete branch-name`",
+        "help": "delete remote branch"
 },
 {
-        "title": "Сброс локальной ветки до состояния удаленной",
-        "content": "В том случае, если отсутствуют изменения, которые необходимо сохранить, сбросить локальную ветку до состояния удаленной можно с помощью двух простых команд.\n\n Прежде всего нужно получить свежие обновления из удаленной ветки: \n\n `git fetch <remoteBranchName>`. \n\n А затем нужно сообщить git, что локальную ветку следует «откатить» до состояния удаленной: \n\n `git reset --hard origin/<localBranchName>`. \n\n При наличии коммита, который нужно сохранить, перед сбросом  нужно создать новую ветку и произвести коммит: `git commit -m \"just in case\"` \n\n `git branch my-new-branch-name`",
-        "help": "reset local branch to match remote сброс локальной ветки до состояния удаленной"
+        "title": "Reset local branch to match remote",
+        "content": "Assuming that you have no changes that you want to save, this can be done with two easy commands. \n\n First let's get a fresh fetch of the remote: \n\n `git fetch <remoteBranchName>`. \n\n Then let's tell git that we want to reset our local to the head of our remote branch like so: \n\n `git reset --hard origin/<localBranchName>`. \n\n If you do have a commit that you wish to keep, you should check out a new branch and make a commit before resetting: `git commit -m \"just in case\"` \n\n `git branch my-new-branch-name`",
+        "help": "reset local branch to match remote"
 },
 {
-        "title": "Отображения числа коммитов от каждого участника",
-        "content": "Хотите узнать, сколько коммитов сделал каждый участник команды?\n\n Эта команда выведет список, отсортированный в порядке убывания количества коммитов: `git shortlog -s -n` \n\n.",
-        "help": "show number commits показать число коммитов"
+        "title": "Show number of commits from each contributor",
+        "content": "Want to see how many commits everyone in your team has made? \n\n `git shortlog -s -n` \n\n This will order the authors in decending order by number of commits made.",
+        "help": "show number commits"
 },
 {
-        "title": "Отображение всех коммитов одного файла",
-        "content": "Если вы ходите просмотреть все коммиты с изменениями конкретного файла, воспользуйтесь командой `git log --follow -p -- myfile` \n\n Аргумент `--follow` позволяет вывести все изменения над файлом, даже если в процессе работы он был переименован. \n\n Если опустить оцию `-p`, то система выведет только сообщения коммитов, но не их содержимое.",
-        "help": "show all commits file показать все коммиты файла",
+        "title": "Show all the commits to one file",
+        "content": "Ever wanted to see all the commits made to a single file? \n\n `git log --follow -p -- myfile` \n\n This will show all the commits made to a single file. The `--follow` argument ensures that we can see commits made to that file even if it was under a different file name at the time. \n\n Omit the `-p` to just see the commit messages and not the commit content.",
+        "help": "show all commits file",
         "cmds": "git log follow"
 },
 {
-        "title": "Использование алиасов команд в командой строке",
-        "content": "Устали каждый раз печатать `git status`? Этой команде можно присвоить простой алиас, который проще и быстрее вбивать в git. \n\n `git config --global alias.st status` \n\n — теперь нужно писать только `git st` \n\n Можно пойти дальше и присвоить алиасы более сложным командам: \n\n `git config --global alias.logme 'log -p --author=Rob'` \n\n Теперь алиас `git logme` будет выводить все наши коммиты.",
-        "help": "command alias алиасы команд"
+        "title": "Use command alias's in your CLI",
+        "content": "Getting fed up of typing `git status`? Well we can easily alias that command to something slightly quicker to type within git. \n\n `git config --global alias.st status` \n\n Now all we have to type is `git st` \n\n We can take it a step further by aliasing more complicated commands to an alias: \n\n `git config --global alias.logme 'log -p --author=Rob'` \n\n Now we've aliased `git logme` to show all of our commits.",
+        "help": "command alias"
 },
 {
-        "title": "Пометить конфликтующий файл, как разрешенный",
-        "content": "Чтобы пометить один или несколько конфликтующих файлов, как разрешенные, чтобы их можно было нормально изменять, воспользуйтесь командой: \n\n `git add <file>` \n\n Затем можно запустить `git commit`, чтобы разрешить конфликты и опубликовать изменения. \n\n Предложено Робертом Вюншем (Robert Wünsch).",
-        "help": "conflict mark resolve file пометить конликтный файл, как разрешенный",
-        "cmds": "git add"
+    "title": "Mark a conflict file as resolved",
+    "content": "To mark a file (or several) conflicted files as resolved so you can push the changes up, normally add these files: \n\n `git add <file>` \n\n You can then type `git commit` to solve these conflicts and push the changes up. \n\n Suggested by Robert Wünsch.",
+    "help": "conflict mark resolve file",
+    "cmds": "git add"
+},{
+    "title": "Display all unpushed commits",
+    "content": "To view all the commits that are yet to be pushed to all branches, use the following command: \n\n `git log --branches --not --remotes` \n\n Alternatively, you can also use: \n\n `git log origin/master..HEAD`",
+    "help": "display show unpushed commits",
+    "cmds": "git log"
+},{
+    "title": "Rename a git tag",
+    "content": "To rename an existing tag: \n\n `git tag <newTag> <oldTag>` \n\n `git tag -d <oldTag>` \n\n `git push origin :refs/tags/<oldTag>` \n\n `git push --tags`",
+    "help": "rename tag name change",
+    "cmds": "git tag"
+},{
+    "title": "Remove old remote git branches",
+    "content": "If a branch is removed on the remote, you can delete it from the local refs by using the `git-remote prune <name>` feature. \n\n This will delete the stale remote-tracking branch under <name>, where the stale branch has already been removed from the remote repository referenced by <name>, but are still locally available in `remotes/<name>`.",
+    "help": "remove old prune branch",
+    "cmds": "git remote prune <remote>"
 },
 {
-        "title": "Просмотр всех неотправленных коммитов",
-        "content": "Чтобы просмотреть все коммиты, которые еще не были отправлены в соответствующие ветки, воспользуйтесь следующей командой: \n\n `git log --branches --not --remotes` \n\n Кроме того, можно использовать: \n\n `git log origin/master..HEAD`",
-        "help": "display show unpushed commits отображение неотправленных коммитов",
-        "cmds": "git log"
+    "title": "Update a specific submodule",
+    "content": "To update a specific submodule in your repository, you should append the path to your submodule: \n\n `git submodule update --remote --merge <path>` \n\n Suggested by Wouter Peschier.",
+    "help": "update submodule",
+    "cmds": "git submodule remote merge"
 },
 {
-        "title": "Переименование тега",
-        "content": "Чтобы переименовать существующий тег: \n\n `git tag <newTag> <oldTag>` \n\n `git tag -d <oldTag>` \n\n `git push origin :refs/tags/<oldTag>` \n\n `git push --tags`",
-        "help": "rename tag name change переименование тега",
-        "cmds": "git tag"
+    "title": "Stage deleted files",
+    "content": "To stage for commit files or folders that you have deleted locally, you can use: \n\n `git add -u` \n\n If you only want to stage the current path you're in, use: \n\n `git add -u .`",
+    "help": "stage commit deleted files folders",
+    "cmds": "git add -u"
 },
 {
-        "title": "Удаление старых веток, стертых из внешнего репозитория",
-        "content": "Если ветка удалена из внешнего репозитория, ее также можно стереть из локального репозитория с помощью команды `git-remote prune <name>`. \n\n Она удалит старую ветку под названием <name>, которая уже была стерта из внешнего репозитория, но все еще доступна локально в `remotes/<name>`.",
-        "help": "remove old prune branch удаление старой ветки",
-        "cmds": "git remote prune <remote>"
+    "title": "Move recent commits to a new branch",
+    "content": "Say you want to move the last 2 commits into a new, separate branch. You can do this by creating the branch, rolling back 2 commits and checking out the branch. So: \n\n `git branch <branch-name>` \n\n `git reset --hard HEAD~2 # this rolls back 2 commits` \n\n `git checkout <branch-name>` \n\n Note that by HARD resetting you will lose any uncommited work. So make sure that everything is committed!",
+    "help": "move recent commits to new branch last",
+    "cmds": "git reset branch"
 },
 {
-        "title": "Обновление конкретного подмодуля",
-        "content": "Чтобы обновить конкретный подмодуль в репозитории, нужно добавить путь к подмодулю: \n\n `git submodule update --remote --merge <path>` \n\n Предложено Вутером Пескье (Wouter Peschier).",
-        "help": "update submodule обновление подмодуля",
-        "cmds": "git submodule remote merge"
-},
-{
-        "title": "Подготовка удаленных файлов",
-        "content": "Чтобы подготовить к коммиту файлы и папки, которые были удалены локально, можно использовать специальную команду: \n\n `git add -u` \n\n Если требуется подготовить только используемый в данный момент путь, воспользуйтесь командой \n\n `git add -u .`",
-        "help": "stage commit deleted files folders подготовка к коммиту удаленных файлов и папок",
-        "cmds": "git add -u"
+    "title": "Show all remote branches",
+    "content": "To view a list of all tracked and untracked remote branches, use: \n\n `git remote show origin`",
+    "help": "show branches remote display",
+    "cmds": "git add -u"
 }]
