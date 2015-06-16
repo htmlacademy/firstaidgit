@@ -14,7 +14,7 @@ let Footer = React.createClass({
                     <div className="column-3">
                         <h3>Другие ресурсы</h3>
                         <ul>
-                            <li><a href="https://github.com/k88hudson/git-flight-rules">Git ЧаВо</a></li>
+                            <li><a href="https://github.com/k88hudson/git-flight-rules">Путеводитель по Git</a></li>
                             <li><a href="http://git-scm.com/documentation">Документация Git</a></li>
                             <li><a href="http://git-scm.com/book/en/v2/Getting-Started-Git-Basics">Основы Git</a></li>
                             <li><a href="https://try.github.io/levels/1/challenges/1">Школа GitHub</a></li>
