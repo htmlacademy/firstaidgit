@@ -15,7 +15,7 @@ let Sidebar = React.createClass({
                 </p>
 
                 <h2 className="sidebar--title">Внести свой вклад</h2>
-                <p>Ищите проблему, которой здесь нет, или нашли ответ, который можно улучшить? Отлично! Вы&nbsp;можете отправить Pull Request в&nbsp;<a href="https://github.com/htmlacademy/firstaidgit">Github</a> страницы проекта.</p>
+                <p>Ищете проблему, которой здесь нет, или нашли ответ, который можно улучшить? Отлично! Вы&nbsp;можете отправить Pull Request в&nbsp;<a href="https://github.com/htmlacademy/firstaidgit">Github</a> страницы проекта.</p>
                 <p>Вопросы? Пишите нам <a href="https://twitter.com/htmlacademy_ru">в&nbsp;Twitter</a>.</p>
 
         </div>
